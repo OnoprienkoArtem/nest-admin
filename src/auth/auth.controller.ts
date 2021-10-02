@@ -65,7 +65,7 @@ export class AuthController {
     return user;
   }
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Get('user')
   async user(@Req() request: Request) {
     const cookie = request.cookies['jwt'];
@@ -74,7 +74,7 @@ export class AuthController {
     return this.userService.findOne({ id: data['id'] });
   }
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Post('logout')
   async logout(@Res({ passthrough: true }) response: Response) {
     response.clearCookie('jwt');
