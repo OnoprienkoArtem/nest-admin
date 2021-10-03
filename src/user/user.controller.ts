@@ -2,11 +2,12 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
-  Get, Param,
+  Get,
+  Param,
   Post,
   UseGuards,
-  UseInterceptors
-} from "@nestjs/common";
+  UseInterceptors,
+} from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserCreateDto } from './models/user-create.dto';
 import { User } from './models/user.entity';
