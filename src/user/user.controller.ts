@@ -4,12 +4,13 @@ import {
   Controller,
   Get,
   Param,
-  Post,
+  Post, Put,
   UseGuards,
-  UseInterceptors,
-} from '@nestjs/common';
+  UseInterceptors
+} from "@nestjs/common";
 import { AuthGuard } from '../auth/auth.guard';
 import { UserCreateDto } from './models/user-create.dto';
+import { UserUpdateDto } from "./models/user-update.dto";
 import { User } from './models/user.entity';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcryptjs';
@@ -40,5 +41,10 @@ export class UserController {
   @Get(':id')
   async get(@Param('id') id: number) {
     return this.userService.findOne({ id });
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() body: UserUpdateDto) {
+    return this.userService.update(id, body);
   }
 }
