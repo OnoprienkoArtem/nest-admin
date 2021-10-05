@@ -4,13 +4,13 @@ import {
   Controller, Delete,
   Get,
   Param,
-  Post, Put,
+  Post, Put, Query,
   UseGuards,
-  UseInterceptors
-} from "@nestjs/common";
+  UseInterceptors,
+} from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserCreateDto } from './models/user-create.dto';
-import { UserUpdateDto } from "./models/user-update.dto";
+import { UserUpdateDto } from './models/user-update.dto';
 import { User } from './models/user.entity';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcryptjs';
@@ -22,8 +22,8 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  async all(): Promise<User[]> {
-    return this.userService.all();
+  async all(@Query('page') page = 1): Promise<User[]> {
+    return this.userService.paginate(page);
   }
 
   @Post()
