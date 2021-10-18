@@ -27,19 +27,19 @@ export abstract class AbstractService {
     return this.repository.find();
   }
 
-  // async create(data): Promise<User> {
-  //   return this.userRepository.save(data);
-  // }
-  //
-  // async findOne(condition): Promise<User> {
-  //   return this.userRepository.findOne(condition);
-  // }
-  //
-  // async update(id: number, data): Promise<any> {
-  //   return this.userRepository.update(id, data);
-  // }
-  //
-  // async delete(id: number): Promise<any> {
-  //   return this.userRepository.delete(id);
-  // }
+  async create(data): Promise<any> {
+    return this.repository.save(data);
+  }
+
+  async findOne(condition): Promise<any> {
+    return this.repository.findOne(condition);
+  }
+
+  async update(id: number, data): Promise<any> {
+    return this.repository.update(id, data);
+  }
+
+  async delete(id: number): Promise<any> {
+    return this.repository.delete(id);
+  }
 }
