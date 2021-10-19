@@ -1,10 +1,13 @@
 import {
   Body,
   ClassSerializerInterceptor,
-  Controller, Delete,
+  Controller,
+  Delete,
   Get,
   Param,
-  Post, Put, Query,
+  Post,
+  Put,
+  Query,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -22,8 +25,8 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  async all(@Query('page') page = 1): Promise<User[]> {
-    return this.userService.paginate(page);
+  async all(@Query('page') page = 1) {
+    return this.userService.paginate(page, ['role']);
   }
 
   @Post()
@@ -40,7 +43,7 @@ export class UserController {
 
   @Get(':id')
   async get(@Param('id') id: number) {
-    return this.userService.findOne({ id });
+    return this.userService.findOne({ id }, ['role']);
   }
 
   @Put(':id')

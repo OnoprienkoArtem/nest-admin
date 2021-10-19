@@ -6,11 +6,12 @@ import { PaginatedResult } from './models/paginated-result.interface';
 export abstract class AbstractService {
   protected constructor(protected readonly repository: Repository<any>) {}
 
-  async paginate(page = 1): Promise<PaginatedResult> {
+  async paginate(page = 1, relations = []): Promise<PaginatedResult> {
     const take = 15;
     const [data, total] = await this.repository.findAndCount({
       take,
       skip: (page - 1) * take,
+      relations,
     });
 
     return {
