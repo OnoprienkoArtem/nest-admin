@@ -23,8 +23,8 @@ export abstract class AbstractService {
     };
   }
 
-  async all(): Promise<any[]> {
-    return this.repository.find();
+  async all(relations = []): Promise<any[]> {
+    return this.repository.find({ relations });
   }
 
   async create(data): Promise<any> {
