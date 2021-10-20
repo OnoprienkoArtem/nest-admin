@@ -8,10 +8,13 @@ import {
   Post,
   Put,
   Query,
+  Req,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 import { UserCreateDto } from './models/user-create.dto';
 import { UserUpdateDto } from './models/user-update.dto';
 import { User } from './models/user.entity';
@@ -22,7 +25,10 @@ import * as bcrypt from 'bcryptjs';
 @UseGuards(AuthGuard)
 @Controller('users')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+  ) {}
 
   @Get()
   async all(@Query('page') page = 1) {
@@ -44,6 +50,18 @@ export class UserController {
   @Get(':id')
   async get(@Param('id') id: number) {
     return this.userService.findOne({ id }, ['role']);
+  }
+
+  @Put('info')
+  async updateInfo(@Req() request: Request, @Body() body: UserUpdateDto) {
+    const id = await this.authService.userId(request);
+    await this.userService.update(id, body);
+
+    return this.userService.findOne({ id });
+  }
+
+  async updatePassword() {
+
   }
 
   @Put(':id')
