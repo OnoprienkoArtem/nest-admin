@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller()
 export class UploadController {
@@ -14,6 +15,17 @@ export class UploadController {
     FileInterceptor('image', {
       storage: diskStorage({
         destination: './uploads',
+        filename(_, file, callback) {
+          const randomName = Array(32)
+            .fill(null)
+            .map(() => Math.round(Math.random() * 16).toString(16))
+            .join('');
+          return callback(
+            null,
+            randomName,
+            `${randomName}${extname(file.originalname)}`,
+          );
+        },
       }),
     }),
   )
