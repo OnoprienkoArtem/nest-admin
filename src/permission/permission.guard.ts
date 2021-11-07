@@ -8,7 +8,7 @@ export class PermissionGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const access = this.reflector.get('access', context.getHandler);
+    const access = this.reflector.get<string>('access', context.getHandler());
     return true;
   }
 }
