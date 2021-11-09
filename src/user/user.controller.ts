@@ -32,6 +32,7 @@ export class UserController {
   ) {}
 
   @Get()
+  @HasPermission('view_users')
   async all(@Query('page') page = 1) {
     return this.userService.paginate(page, ['role']);
   }

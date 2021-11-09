@@ -27,5 +27,5 @@ export class Role {
       referencedColumnName: 'id',
     },
   })
-  permission: Permission[];
+  permissions: Permission[];
 }
