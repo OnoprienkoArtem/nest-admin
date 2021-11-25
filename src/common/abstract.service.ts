@@ -15,7 +15,7 @@ export abstract class AbstractService {
     });
 
     return {
-      data,
+      data: data,
       meta: {
         total,
         page,
