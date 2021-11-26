@@ -35,7 +35,7 @@ export class OrderService extends AbstractService {
       SELECT DATE_FORMAT(o.created_at, '%Y-%m-%d') as date, sum(i.price * i.quantity) as sum
       FROM orders o
       JOIN order_items i on o.id = i.order_id
-      GROUP BY date    
+      GROUP BY date;  
     `);
   }
 }
