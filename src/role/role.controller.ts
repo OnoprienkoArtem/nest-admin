@@ -15,7 +15,7 @@ export class RoleController {
   constructor(private roleService: RoleService) {}
 
   @Get()
-  @HasPermission('roles')
+  // @HasPermission('roles')
   async all() {
     return this.roleService.all();
   }

@@ -33,7 +33,7 @@ export class UserController {
   ) {}
 
   @Get()
-  @HasPermission('users')
+  // @HasPermission('users')
   async all(@Query('page') page = 1) {
     return this.userService.paginate(page, ['role']);
   }
@@ -97,7 +97,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  @HasPermission('users')
+  // @HasPermission('users')
   async delete(@Param('id') id: number) {
     await this.userService.delete(id);
   }
