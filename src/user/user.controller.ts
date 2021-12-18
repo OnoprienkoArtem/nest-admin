@@ -39,7 +39,7 @@ export class UserController {
   }
 
   @Post()
-  @HasPermission('users')
+  // @HasPermission('users')
   async create(@Body() body: UserCreateDto): Promise<User> {
     const password = await bcrypt.hash('1234', 12);
     const { role_id, ...data } = body;

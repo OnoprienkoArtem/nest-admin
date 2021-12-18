@@ -21,7 +21,7 @@ export class RoleController {
   }
 
   @Post()
-  @HasPermission('roles')
+  // @HasPermission('roles')
   async create(@Body('name') name: string, @Body('permissions') ids: number[]) {
     return this.roleService.create({
       name,
