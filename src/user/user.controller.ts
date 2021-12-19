@@ -52,7 +52,7 @@ export class UserController {
   }
 
   @Get(':id')
-  @HasPermission('users')
+  // @HasPermission('users')
   async get(@Param('id') id: number) {
     return this.userService.findOne({ id }, ['role']);
   }
@@ -84,7 +84,7 @@ export class UserController {
   }
 
   @Put(':id')
-  @HasPermission('users')
+  // @HasPermission('users')
   async update(@Param('id') id: number, @Body() body: UserUpdateDto) {
     const { role_id, ...data } = body;
 
